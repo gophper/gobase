@@ -199,7 +199,7 @@ func (self *MailMessage) String() string {
 	write("Bcc: ", self.Bcc)
 	fmt.Fprintf(&buf, "Date: %s%s", time.Now().UTC().Format(time.RFC822), crlf)
 	// content_type := "Content-Type: text/plain" + "; charset=UTF-8" crlf, content_type,
-	fmt.Fprintf(&buf, "Subject: %s%s%s%s%s", self.Subject, crlf, self.Content)
+	fmt.Fprintf(&buf, "Subject: %s%s%s", self.Subject, crlf, self.Content)
 	return buf.String()
 }
 
