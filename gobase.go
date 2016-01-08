@@ -16,7 +16,6 @@ package gobase
 import (
 	"flag"
 	"fmt"
-	. "github.com/gophper/log"
 	"os"
 	"os/signal"
 	"path"
@@ -27,7 +26,7 @@ import (
 
 var (
 	// 日志
-	Log *GoLogger
+	Log *BaseLog
 	//配置文件
 	Config     *GoConfig
 	SigHandler = make(map[string]interface{})
@@ -104,16 +103,13 @@ func LoadConfig(configFile string) (cfg *GoConfig) {
 	return cfg
 }
 
-func defaultLog() *GoLogger {
-	var logOptions = make(map[string]interface{})
+func defaultLog() *BaseLog {
 	logType, _ := Config.String("log.type", "console")
-	logOptions["file"], _ = Config.String("log.file", "")
-	logOptions["level"], _ = Config.Int("log.level", 5)
-	logOptions["flags"], _ = Config.Int("log.flag", 9)
-	logOptions["sysLevel"], _ = Config.Int("log.syslevel", 6)
-	l := NewLogger()
-	l.SetLogger(logType, logOptions)
-	return l
+	logFile, _ := Config.String("log.file", "")
+	logLevel, _ := Config.Int("log.level", 5)
+	logFlag, _ := Config.Int("log.flag", 9)
+	opt := &LogOptions{Type: logType, File: logFile, Level: logLevel, Flag: logFlag}
+	return NewLog(opt)
 }
 
 func SignalHandle(funcs map[string]interface{}) {
