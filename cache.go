@@ -18,7 +18,7 @@ type Object struct {
 }
 
 var (
-	CacheTable       *Cache
+	CacheTable             = NewCache()
 	ErrTimeOut       error = errors.New("The cache has been timeout.")
 	ErrKeyNotFound   error = errors.New("The key was not found.")
 	ErrTypeAssertion error = errors.New("Type assertion error.")
