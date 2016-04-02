@@ -195,7 +195,7 @@ func NewXorm(opt *OrmOption) (orm *xorm.Engine, err error) {
 	}
 
 	orm.TZLocation = time.Local
-	orm.ShowSQL = opt.Debug
+	orm.ShowSQL(opt.Debug)
 	//orm.Logger = xorm.NewSimpleLogger(Log.Loger)
 	return orm, nil
 }
